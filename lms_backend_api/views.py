@@ -4,11 +4,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+from rest_framework.permissions import IsAuthenticated
 
 class TeacherList(APIView):
     """
     List all teacher, or create a new teacher.
     """
+    permission_classes=[IsAuthenticated,]
     def get(self, request, format=None):
         teacher = Teacher.objects.all()
         serializer = TeacherSerializers(teacher, many=True)
